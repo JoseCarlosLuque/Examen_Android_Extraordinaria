@@ -7,7 +7,7 @@ import retrofit2.http.Path
 interface APIservice {
 
     @GET("recipes")
-    suspend fun getAllRecipes ():Response<RecetaResponse>
+    suspend fun getAllRecipes (): Response<RecetaResponse>
     // Tener en cuenta que se ha de usar el Response de Retrofit, no el de OKhttp3
 
     // Endpoint para buscar por el id del superheroe:

@@ -4,6 +4,7 @@ import android.os.Parcelable
 import com.google.gson.annotations.SerializedName
 
 
+
 data class RecetaResponse(
     @SerializedName("recipes") val recipes: List<DatosReceta>
 )

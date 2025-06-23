@@ -7,6 +7,7 @@ import androidx.recyclerview.widget.RecyclerView
 import com.jose_carlos.examen_android_extraordinaria.Retrofit.DatosReceta
 import com.jose_carlos.examen_android_extraordinaria.R
 import com.jose_carlos.examen_android_extraordinaria.Retrofit.RecetaResponse
+import okhttp3.Response
 
 class AdapterReceta (
     var recipeList: List<DatosReceta> = emptyList(),

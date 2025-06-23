@@ -1,5 +1,6 @@
 package com.jose_carlos.examen_android_extraordinaria
 
+import android.content.Intent
 import android.os.Bundle
 import androidx.activity.enableEdgeToEdge
 import androidx.appcompat.app.AppCompatActivity
@@ -37,10 +38,9 @@ class MainActivity : AppCompatActivity() {
 
             // Nevesitamos hacer esto para que se cambie en el hilo principal.
             withContext(Dispatchers.Main) {
-                if (myResponse.isSuccessful) {
-                    adapter.updateList(myResponse.body()?.recipes ?: emptyList())
-                }
+                adapter.updateList(myResponse.body()?.recipes ?: emptyList())
             }
+            adapter = AdapterReceta{ navigateToDetail(it) }
             adapter = AdapterReceta{ navigateToDetail(it) }
             binding.MiRecycler.setHasFixedSize(true)
             binding.MiRecycler.layoutManager = LinearLayoutManager(this@MainActivity)
@@ -51,7 +51,9 @@ class MainActivity : AppCompatActivity() {
     }
 
     private fun navigateToDetail(id: String) {
-
+        val intent = Intent(this, Detail_Activity::class.java)
+        intent.putExtra( EXTRA_ID, id)
+        startActivity(intent) // Lanzamos la activity.
     }
 }
 /*
