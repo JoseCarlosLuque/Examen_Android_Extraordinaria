@@ -19,6 +19,7 @@ class Detail_Activity : AppCompatActivity() {
     companion object {
         const val EXTRA_ID = "extra_id"
     }
+
     // Instanciamos retrofit:
     val api = RetrofitClient.instance.create(APIservice::class.java)
 
@@ -32,8 +33,8 @@ class Detail_Activity : AppCompatActivity() {
         setContentView(binding.root)
 
         // Creamos el extra del intent:
-        val id:String = intent.getStringExtra(EXTRA_ID).orEmpty()
-        getProductInformation (id)
+        val id: String = intent.getStringExtra(EXTRA_ID).orEmpty()
+        getProductInformation(id)
 
     }
 
@@ -42,10 +43,17 @@ class Detail_Activity : AppCompatActivity() {
         lifecycleScope.launch(Dispatchers.IO) {
             val response = api.searchById(id)
             withContext(Dispatchers.Main) {
-                if (response.isSuccessful) {
-                    // Picasso.get().load(superheroItemResponse.image.imageUrl).into(binding.cardImage)
-                    Picasso.get().load(response.body()?.image).into(binding.ivRecipe)
-                }
-            }
 
+                // Picasso.get().load(superheroItemResponse.image.imageUrl).into(binding.cardImage)
+                Picasso.get().load(response.body()?.image).into(binding.ivRecipe)
+                binding.cookingtime.text = response.body()?.cookTimeMinutes.toString()
+                binding.prepTime.text = response.body()?.prepTimeMinutes.toString()
+                binding.mealtipe.text = response.body()?.mealType.toString()
+                binding.rating.text = response.body()?.rating.toString()
+                binding.servings.text = response.body()?.servings.toString()
+                // mealTipe rating, servings
+            }
         }
+
+    }
+}

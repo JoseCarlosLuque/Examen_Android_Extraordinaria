@@ -8,6 +8,7 @@ import androidx.core.view.ViewCompat
 import androidx.core.view.WindowInsetsCompat
 import androidx.lifecycle.lifecycleScope
 import androidx.recyclerview.widget.LinearLayoutManager
+import com.jose_carlos.examen_android_extraordinaria.Detail_Activity.Companion.EXTRA_ID
 import com.jose_carlos.examen_android_extraordinaria.RecyclerReceta.AdapterReceta
 import com.jose_carlos.examen_android_extraordinaria.Retrofit.APIservice
 import com.jose_carlos.examen_android_extraordinaria.Retrofit.RecetaResponse
@@ -32,7 +33,7 @@ class MainActivity : AppCompatActivity() {
         initUI()
     }
 
-    private fun initUI() {
+     fun initUI() {
         lifecycleScope.launch(Dispatchers.IO) {
             val myResponse: Response<RecetaResponse> = api.getAllRecipes()
 
@@ -40,7 +41,7 @@ class MainActivity : AppCompatActivity() {
             withContext(Dispatchers.Main) {
                 adapter.updateList(myResponse.body()?.recipes ?: emptyList())
             }
-            adapter = AdapterReceta{ navigateToDetail(it) }
+
             adapter = AdapterReceta{ navigateToDetail(it) }
             binding.MiRecycler.setHasFixedSize(true)
             binding.MiRecycler.layoutManager = LinearLayoutManager(this@MainActivity)
