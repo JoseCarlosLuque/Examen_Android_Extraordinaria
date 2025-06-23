@@ -13,3 +13,10 @@ class MainActivity : AppCompatActivity() {
 
     }
 }
+
+/*
+    Para subirlo al repo del examen:
+    git remote add origin https://github.com/JoseCarlosLuque/Examen_Android_Extraordinaria.git
+git push -u origin main
+
+ */
