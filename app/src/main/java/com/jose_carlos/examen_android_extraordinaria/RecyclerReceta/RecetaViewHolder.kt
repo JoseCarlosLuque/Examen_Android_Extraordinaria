@@ -17,7 +17,7 @@ class RecetaViewHolder(view: View ) : RecyclerView.ViewHolder(view) {
         binding.root.setOnClickListener{
             onItemSelected(datos.id.toString())
             /*
-            *   Le pasamos el id del superhero e a la funcion.
+            *   Le pasamos el id de la receta e a la funcion.
             */
         }
     }
