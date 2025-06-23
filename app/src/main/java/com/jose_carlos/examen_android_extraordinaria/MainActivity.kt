@@ -34,21 +34,19 @@ class MainActivity : AppCompatActivity() {
     }
 
      fun initUI() {
+         adapter = AdapterReceta{ navigateToDetail(it) }
+         binding.MiRecycler.setHasFixedSize(true)
+         binding.MiRecycler.layoutManager = LinearLayoutManager(this@MainActivity)
+         binding.MiRecycler.adapter = adapter
         lifecycleScope.launch(Dispatchers.IO) {
             val myResponse: Response<RecetaResponse> = api.getAllRecipes()
 
             // Nevesitamos hacer esto para que se cambie en el hilo principal.
-            withContext(Dispatchers.Main) {
+            withContext(Dispatchers.Main){
                 adapter.updateList(myResponse.body()?.recipes ?: emptyList())
             }
 
-            adapter = AdapterReceta{ navigateToDetail(it) }
-            binding.MiRecycler.setHasFixedSize(true)
-            binding.MiRecycler.layoutManager = LinearLayoutManager(this@MainActivity)
-            binding.MiRecycler.adapter = adapter
         }
-
-
     }
 
     private fun navigateToDetail(id: String) {
